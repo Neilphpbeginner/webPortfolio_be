@@ -20,10 +20,13 @@ router.post("/sendEmail", (req, res) => {
 
   transporter.sendMail(
     {
-      from: enquiryEmailAdress,
+      from: process.env.ADMINEMAIL,
       to: "lemmer.neil@gmail.com",
       subject: enquiryEnailSubject,
-      html: enquiryEmailContent,
+      html: `
+      Hi Neil you recieved an enquiry from ${enquiryEmailAdress}. \n
+      And the details of the enquiry is. \n
+      <h2>${enquiryEmailContent}</h2>`,
     },
     (error, info) => {
       if (error) {

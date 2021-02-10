@@ -6,7 +6,6 @@ var cors = require("cors");
 var PORT = process.env.PORT || 8080;
 
 var emailRouter = require("./routes/emailRouter");
-
 var app = express();
 
 app.use(logger("dev"));
@@ -19,9 +18,9 @@ dotenv.config();
 app.use("/email", emailRouter);
 
 app.get("/", (req, res) => {
-	res.send("Hello");
+  res.send("Hello");
 });
 
 app.listen(PORT, () => {
-	console.log("Server up and running on port no. " + PORT);
+  console.log("Server up and running on port no. " + PORT);
 });
