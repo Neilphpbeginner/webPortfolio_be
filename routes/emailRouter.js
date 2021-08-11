@@ -2,15 +2,11 @@ const nodemailer = require("nodemailer");
 const router = require("express").Router();
 
 router.post("/sendEmail", (req, res) => {
-  const {
-    enquiryEmailAdress,
-    enquiryEnailSubject,
-    enquiryEmailContent,
-  } = req.body;
+  const { enquiryEmailAdress, enquiryEnailSubject, enquiryEmailContent } =
+    req.body;
 
   let transporter = nodemailer.createTransport({
-    host: "mail.nlemmercv.co.za",
-    port: 465,
+    service: "Gmail",
     secure: true,
     auth: {
       user: process.env.ADMINEMAIL,
@@ -30,7 +26,7 @@ router.post("/sendEmail", (req, res) => {
     },
     (error, info) => {
       if (error) {
-        console.log(error);
+        res.send(error);
       } else {
         res.status(200).send(info);
       }
