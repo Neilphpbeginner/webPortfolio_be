@@ -7,7 +7,6 @@ router.post("/sendEmail", (req, res) => {
 
   let transporter = nodemailer.createTransport({
     service: "Gmail",
-    secure: true,
     auth: {
       user: process.env.ADMINEMAIL,
       pass: process.env.ADMINPASSWORD,
