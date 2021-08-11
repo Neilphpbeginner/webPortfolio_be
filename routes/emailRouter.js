@@ -6,10 +6,16 @@ router.post("/sendEmail", (req, res) => {
     req.body;
 
   let transporter = nodemailer.createTransport({
-    service: "Gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     auth: {
+      type: "OAuth2",
       user: process.env.ADMINEMAIL,
-      pass: process.env.ADMINPASSWORD,
+      clientId: process.env.CLIENID,
+      clientSecret: process.env.CLIENTSECTRET,
+      refreshToken: process.env.REFRESHTOKEN,
+      accessToken: process.env.ACCESSTOKEN,
     },
   });
 
