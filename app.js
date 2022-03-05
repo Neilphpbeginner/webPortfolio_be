@@ -4,6 +4,15 @@ let logger = require("morgan");
 let dotenv = require("dotenv");
 let cors = require("cors");
 let PORT = process.env.PORT || 8080;
+const mongoose = require("mongoose");
+
+mongoose
+  .connect(
+    "mongodb+srv://Neil:kopPxu5GUZNZnWH7@test.gumuz.mongodb.net/futureemployers?retryWrites=true&w=majority"
+  )
+  .catch((error) => {
+    console.log(error);
+  });
 
 let emailRouter = require("./routes/emailRouter");
 let app = express();

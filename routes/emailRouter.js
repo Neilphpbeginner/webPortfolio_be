@@ -1,9 +1,24 @@
 const nodemailer = require("nodemailer");
 const router = require("express").Router();
 const dotenv = require("dotenv").config();
+const newEnquirySchema = require("../enquiryOfFutureEmployer/employer");
 
-router.post("/sendEmail", (req, res) => {
-  const { enquiryEmailAdress, enquiryEnailSubject, enquiryEmailContent } =
+router.post("/sendEmail", async (req, res) => {
+  const enquiryToBeSaved = new newEnquirySchema({
+    enquiryEmailAdress: req.body.enquiryEmailAdress,
+    enquiryEmailSubject: req.body.enquiryEmailSubject,
+    enquiryEmailContent: req.body.enquiryEmailContent,
+  });
+
+  const newEnquiry = await enquiryToBeSaved.save((error) => {
+    if (!error) {
+      console.log("Information saved into the database");
+    } else {
+      console.log("problem conneting to the database please check settings");
+    }
+  });
+
+  const { enquiryEmailAdress, enquiryEmailSubject, enquiryEmailContent } =
     req.body;
 
   let transporter = nodemailer.createTransport({
@@ -24,8 +39,8 @@ router.post("/sendEmail", (req, res) => {
   transporter.sendMail(
     {
       from: enquiryEmailAdress,
-      to: "lemmer.neil@gmail.com",
-      subject: enquiryEnailSubject,
+      to: process.env.ADMINEMAIL,
+      subject: enquiryEmailSubject,
       html: `
       Hi Neil you recieved an enquiry from ${enquiryEmailAdress}. \n
       And the details of the enquiry is. \n
