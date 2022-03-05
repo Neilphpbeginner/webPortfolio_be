@@ -1,12 +1,12 @@
-var express = require("express");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var dotenv = require("dotenv");
-var cors = require("cors");
-var PORT = process.env.PORT || 8080;
+let express = require("express");
+let cookieParser = require("cookie-parser");
+let logger = require("morgan");
+let dotenv = require("dotenv");
+let cors = require("cors");
+let PORT = process.env.PORT || 8080;
 
-var emailRouter = require("./routes/emailRouter");
-var app = express();
+let emailRouter = require("./routes/emailRouter");
+let app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
