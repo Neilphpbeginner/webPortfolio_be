@@ -56,4 +56,13 @@ router.post("/sendEmail", async (req, res) => {
   );
 });
 
+router.get("/getAllEnquiries", async (req, res) => {
+  try {
+    const data = await newEnquirySchema.find();
+    res.send(data);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;

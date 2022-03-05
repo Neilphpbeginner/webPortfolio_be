@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 employerEnquirySchema = new mongoose.Schema({
   enquiryEmailAdress: String,
   enquiryEmailSubject: String,
