@@ -50,7 +50,7 @@ router.post("/sendEmail", async (req, res) => {
       if (error) {
         res.send(error);
       } else {
-        res.status(200).send(info);
+        res.send(info);
       }
     }
   );
